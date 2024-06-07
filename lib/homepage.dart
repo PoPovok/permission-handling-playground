@@ -24,13 +24,21 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     Permission.assistant,
     Permission.backgroundRefresh
   };
+  static final Set<Permission> _androidNonGooglePlayPermissions = {
+    Permission.sms,
+    Permission.location,
+    Permission.locationAlways,
+    Permission.locationWhenInUse,
+    Permission.phone
+  };
   static final Set<Permission> _webDefaults = {
     Permission.camera,
     Permission.location,
     Permission.microphone,
     Permission.notification
   };
-  static final Set<Permission> _androidDefaults = Permission.values.toSet().difference(_nonAndroidDefaultPermissions);
+  static final Set<Permission> _androidDefaults =
+      Permission.values.toSet().difference(_nonAndroidDefaultPermissions).difference(_androidNonGooglePlayPermissions);
 
   late final List<Permission> permissions;
   var wasAppSettingsOpened = false;
